@@ -12,8 +12,8 @@ def knn(training, test, best_n=1):
         best_n (Optional[int]): Best n matches
 
     Returns:
-        list[list[list[int]]]: List of 2d arrays (the training data) ordered
-            by similarity
+        list[(int, list[list[int]])]: List of tuples containing the 2d arrays (the training data) ordered
+            by similarity and its index in the original training data list.
     """
     training_with_indexes = [(i, img) for i, img in enumerate(training)]
     return heapq.nlargest(best_n, training_with_indexes, lambda x: similarity(x[1], test))
