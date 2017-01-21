@@ -6,7 +6,7 @@ from skimage import feature
 
 def color_circle(img, x, y, r=2):
     h, w = img.shape
-    img[max(0, y-2): min(h, y+2), max(0, x-2): min(w, x+2)] = 1
+    img[max(0, y-r): min(h, y+r), max(0, x-r): min(w, x+r)] = 1
 
 
 def getBinaryEdges(filename, sigma=0.33, r=2):
