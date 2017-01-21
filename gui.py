@@ -1,21 +1,23 @@
 import cv2
 import numpy as np
+from PIL import Image
 
 COLOR = (255, 255, 255)
 RADIUS = 3
+THICKNESS = -1  # filled circle
 
 drawing = False
 end_coords = (-1, -1)
 
 
 def smoothen_drawing(img, coords1, coords2):
-	dx = coords2[0] - coords1[0]
-	dy = coords2[1] - coords1[1]
-	distance = max(abs(dx), abs(dy))
-	for i in range(distance):
-		x = int(coords1[0] + float(i)/distance * dx)
-		y = int(coords1[1] + float(i)/distance * dy)
-		cv2.circle(img, (x, y), RADIUS, COLOR, -1)
+    dx = coords2[0] - coords1[0]
+    dy = coords2[1] - coords1[1]
+    distance = max(abs(dx), abs(dy))
+    for i in range(distance):
+        x = int(coords1[0] + float(i) / distance * dx)
+        y = int(coords1[1] + float(i) / distance * dy)
+        cv2.circle(img, (x, y), RADIUS, COLOR, THICKNESS)
 
 
 def draw_circle(event, x, y, flags, param):
@@ -27,12 +29,12 @@ def draw_circle(event, x, y, flags, param):
 
     elif event == cv2.EVENT_MOUSEMOVE:
         if drawing == True:
-            cv2.circle(img, (x, y), RADIUS, COLOR, -1)
+            cv2.circle(img, (x, y), RADIUS, COLOR, THICKNESS)
             smoothen_drawing(img, end_coords, (x, y))
             end_coords = (x, y)
 
     elif event == cv2.EVENT_LBUTTONUP:
-        cv2.circle(img, (x, y), RADIUS, COLOR, -1)
+        cv2.circle(img, (x, y), RADIUS, COLOR, THICKNESS)
         drawing = False
 
 img = np.zeros((512, 512), np.uint8)
@@ -45,6 +47,7 @@ while True:
     if k == ord('m'):
         mode = not mode
     elif k == 27:
+        Image.fromarray(img).save("sketch.png")
         break
 
 cv2.destroyAllWindows()
