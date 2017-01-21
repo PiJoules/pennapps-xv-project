@@ -29,7 +29,7 @@ def analyseImage(path):
     return results
 
 
-def processImage(path):
+def getGIFFrames(path):
     """
     Iterate the GIF, extracting each frame. Returns a list of numpy
     2D array for each frame.
