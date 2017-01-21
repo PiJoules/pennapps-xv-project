@@ -42,8 +42,8 @@ def similarity(img1, img2):
             elem1 = row1[x]
             elem2 = row2[x]
 
-            #if elem1 == elem2:
-            if elem1 & elem2:
+            if elem1 == elem2:
+            #if elem1 & elem2:
                 score += 1
     return score
 

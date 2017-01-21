@@ -6,11 +6,7 @@ from convert2d import getBinaryEdges
 from knn import knn
 from original_2d_convertion import convert_original_2D
 
-#filename='C:\Users\Bineeta\Desktop\Final Code\1.png'
-#directory_path='C:\Users\Bineeta\Desktop\Final Code\\training1'
-
-#filename = "bag/image31.jpg"
-filename = "training2/image0.bag.jpg"
+filename = "training2/image80.bag.jpg"
 directory_path = "training2"
 
 training=convert_original_2D(directory_path)  # dict[str, arr]
