@@ -14,4 +14,10 @@ def getBinaryEdges(filename):
             if edges_binary[i][j] > 0:
                 edges_binary[i][j] = 1
 
+    plt.subplot(121), plt.imshow(img, cmap='gray')
+    plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122), plt.imshow(edges_binary, cmap='gray')
+    plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+    plt.show()
+
     return edges_binary
