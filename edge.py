@@ -2,8 +2,6 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-from scipy import ndimage as ndimage
-from skimage import feature
 
 
 def getBinaryEdges(filename):
@@ -32,7 +30,7 @@ def getBinaryEdges(filename):
 
 
 def main():
-    getBinaryEdges("FinalCode/ball/image88.jpg")
+    getBinaryEdges("pikachu.jpg")
 
 
 if __name__ == "__main__":
