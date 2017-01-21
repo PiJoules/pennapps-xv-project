@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import heapq
+import cv2
 
 
-def knn(training, test, best_n=1):
+def knn(training, test, best_n):
     """
     Args:
         training (list[list[list[int]]]): List of 2d arrays
@@ -30,6 +31,9 @@ def similarity(img1, img2):
     Returns:
         int
     """
+    # Resize to  256x256
+    assert img2.shape == img1.shape == (256, 256)
+
     score = 0
     for y in xrange(len(img1)):
         row1 = img1[y]
@@ -38,7 +42,8 @@ def similarity(img1, img2):
             elem1 = row1[x]
             elem2 = row2[x]
 
-            if elem1 == elem2:
+            #if elem1 == elem2:
+            if elem1 & elem2:
                 score += 1
     return score
 
