@@ -7,7 +7,7 @@ def analyseImage(path):
     """
     Pre-process pass over the image to determine the mode (full or additive).
     Necessary as assessing single frames isn't reliable. Need to know the mode 
-    before processing all frames.
+    before processing all frames
     """
     im = Image.open(path)
     results = {
