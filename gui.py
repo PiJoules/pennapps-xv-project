@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from PIL import Image
+from matplotlib import pyplot as plt
 
 COLOR = (255, 255, 255)
 RADIUS = 3
@@ -56,11 +57,30 @@ def create_img(filename="sketch.png", w=256, h=256):
         k = cv2.waitKey(1) & 0xFF
         if k == ord('m'):
             mode = not mode
-        elif k == 27:
+        elif k == 13:
             Image.fromarray(img).save(filename)
             break
 
     cv2.destroyAllWindows()
+
+
+def display_results(results):
+    """
+    Displays the original image and the best three matches.
+    """
+    title_dict = {
+        1: "Original",
+        2: "Best Match",
+        3: "2nd Best Match",
+        4: "3rd Best Match"
+    }
+
+    for i in xrange(4):
+        plt.subplot(2, 2, i + 1),
+        plt.imshow(cv2.imread(results[i]), cmap='gray')
+        plt.title(title_dict[i + 1]), plt.xticks([]), plt.yticks([])
+
+    plt.show()
 
 
 def main():

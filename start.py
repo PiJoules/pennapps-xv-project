@@ -8,7 +8,7 @@ import cv2
 
 from convert2d import getBinaryEdges
 from knn import knn
-from gui import create_img
+from gui import create_img, display_results
 from resizer import image_from_pickle_file
 
 
@@ -33,7 +33,8 @@ def load_pickled_training_data(pickle_dir):
             try:
                 bin_arr = pickle.load(f)
             except Exception as e:
-                raise RuntimeError("Unable to open pickle file {}".format(full_path))
+                raise RuntimeError(
+                    "Unable to open pickle file {}".format(full_path))
             data[full_path] = bin_arr
     return data
 
@@ -53,7 +54,7 @@ def main():
     if __debug__:
         print("Loading training data...")
 
-    #training = convert_original_2D(directory_path)  # dict[str, arr]
+    # training = convert_original_2D(directory_path)  # dict[str, arr]
     training = load_pickled_training_data(directory_path)
 
     if __debug__:
@@ -70,7 +71,8 @@ def main():
     if __debug__:
         print("Performing classification on input...")
 
-    results = knn(map(lambda x: x[1], training_vec), test, best_n=5)  # list[tuple[int, 2d arr]]
+    # list[tuple[int, 2d arr]]
+    results = knn(map(lambda x: x[1], training_vec), test, best_n=3)
 
     best_results = []
     for i, img in results:
@@ -79,12 +81,15 @@ def main():
     print("best results:")
     print(map(lambda x: x[0], best_results))
 
-    # Display results
+    results = [filename]
     for result in best_results:
-        img_file = image_from_pickle_file(result[0])  # apple/image0.something.jpg
+        img_file = image_from_pickle_file(result[0])
         full_path = os.path.join("images", img_file)
-        assert os.path.exists(full_path), "File {} does not exist".format(full_path)
-        cv2.imshow(img_file, cv2.imread(full_path, cv2.IMREAD_COLOR))
+        assert os.path.exists(
+            full_path),            "File {} does not exist".format(full_path)
+        results.append(full_path)
+
+    display_results(results)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -93,4 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
