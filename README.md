@@ -61,4 +61,4 @@ performance and runtime usage.
 - Functionaly working program
 
 
-Inspired by SketchIt (https://github.com/njiang/sketchIt)
+Inspired by SketchIt (https://github.com/njiang747/sketchIt)
