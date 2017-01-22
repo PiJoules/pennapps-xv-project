@@ -6,7 +6,6 @@ import cPickle as pickle
 
 from convert2d import getBinaryEdges
 from knn import knn
-from original_2d_convertion import convert_original_2D
 from gui import create_img
 
 
