@@ -55,7 +55,7 @@ def pickle_images(images_dir, w=256, h=256, dest_dir=None):
             if filename.endswith(".jpg"):
                 # Get parent dir
                 immediate_parent_dir = os.path.basename(root)  # apple, bag, etc.
-                basename = filename.rstrip(".jpg") + "." + immediate_parent_dir  # image0.apple
+                basename = filename[:-4] + "." + immediate_parent_dir  # image0.apple
 
                 # Create pickle path
                 p_file = os.path.join(dest_dir, pickle_filename(basename))  # pickled_training_data/image0.apple.p
