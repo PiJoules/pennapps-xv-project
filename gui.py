@@ -6,6 +6,7 @@ COLOR = (255, 255, 255)
 RADIUS = 3
 THICKNESS = -1  # filled circle
 
+img = None
 drawing = False
 end_coords = (-1, -1)
 
@@ -21,7 +22,7 @@ def smoothen_drawing(img, coords1, coords2):
 
 
 def draw_circle(event, x, y, flags, param):
-    global drawing, end_coords
+    global img, drawing, end_coords
 
     if event == cv2.EVENT_LBUTTONDOWN:
         drawing = True
@@ -45,6 +46,7 @@ def create_img(filename="sketch.png", w=256, h=256):
     Returns:
         str: The file this image was saved in.
     """
+    global img
     img = np.zeros((h, w), np.uint8)
     cv2.namedWindow('image')
     cv2.setMouseCallback('image', draw_circle)
