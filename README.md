@@ -60,3 +60,5 @@ performance and runtime usage.
 - Implementation of various classifiers 
 - Functionaly working program
 
+
+Inspired by SketchIt (https://github.com/njiang747/sketchIt)
