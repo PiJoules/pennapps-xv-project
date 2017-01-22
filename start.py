@@ -1,6 +1,8 @@
 from __future__ import print_function
 
 import json
+import os
+import cPickle as pickle
 
 from convert2d import getBinaryEdges
 from knn import knn
@@ -15,10 +17,23 @@ def get_args():
     parser.add_argument("--new-test", type=str, default="sketch.png",
                         help="New test file to create from gui.")
     parser.add_argument("--test-file", help="Image to classify.")
-    parser.add_argument("--training-dir", default="training2",
+    parser.add_argument("--training-dir", default="pickled_training_data",
                         help="Directory containing training data.")
 
     return parser.parse_args()
+
+
+def load_pickled_training_data(pickle_dir):
+    data = {}
+    for p_file in os.listdir(pickle_dir):
+        full_path = os.path.join(pickle_dir, p_file)
+        with open(full_path) as f:
+            try:
+                bin_arr = pickle.load(f)
+            except Exception as e:
+                raise RuntimeError("Unable to open pickle file {}".format(full_path))
+            data[full_path] = bin_arr
+    return data
 
 
 def main():
@@ -36,7 +51,8 @@ def main():
     if __debug__:
         print("Loading training data...")
 
-    training = convert_original_2D(directory_path)  # dict[str, arr]
+    #training = convert_original_2D(directory_path)  # dict[str, arr]
+    training = load_pickled_training_data(directory_path)
 
     if __debug__:
         print("Loaded {} samples of training data...:".format(len(training)))
