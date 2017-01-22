@@ -17,6 +17,10 @@ def knn(training, test, best_n):
             by similarity and its index in the original training data list.
     """
     training_with_indexes = [(i, img) for i, img in enumerate(training)]
+
+    if test.shape != (256, 256):
+        test = cv2.resize(test, (256, 256))
+
     return heapq.nlargest(best_n, training_with_indexes, lambda x: similarity(x[1], test))
 
 

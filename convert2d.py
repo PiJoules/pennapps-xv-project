@@ -10,10 +10,8 @@ def color_circle(img, x, y, r=2):
     img[max(0, y-r): min(h, y+r), max(0, x-r): min(w, x+r)] = 1
 
 
-def getBinaryEdges(filename, sigma=0.33, r=2):
-    img = cv2.imread(filename, 0)
-
-    assert img is not None, "Error imreading file '{}'".format(filename)
+def getBinaryEdgesHelper(img, r=2):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Trim and resize
     # Assuming white background
@@ -42,4 +40,9 @@ def getBinaryEdges(filename, sigma=0.33, r=2):
                 color_circle(edges, x, y, r=r)
 
     return edges
+
+def getBinaryEdges(filename, sigma=0.33, r=2):
+    img = cv2.imread(filename)
+    assert img is not None, "Error imreading file '{}'".format(filename)
+    return getBinaryEdgesHelper(img, r=r)
 
