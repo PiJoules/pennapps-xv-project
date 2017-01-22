@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 from skimage import feature
+from cropimage import trimmed_image, pad_and_resize
 
 
 def color_circle(img, x, y, r=2):
@@ -13,6 +14,11 @@ def getBinaryEdges(filename, sigma=0.33, r=2):
     img = cv2.imread(filename, 0)
 
     assert img is not None, "Error imreading file '{}'".format(filename)
+
+    # Trim and resize
+    # Assuming white background
+    trimmed = trimmed_image(img)
+    img = pad_and_resize(trimmed, 256, 256)
 
     #v = np.median(img)
     #lower = int(max(0, (1.0 - sigma) * v))
