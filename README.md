@@ -48,7 +48,7 @@ be extracted from the input sketch. Additionally, KNN and SVN classifiers were t
 performance and runtime usage.
 
 
-## Tools/Tech Used
+## Tools Used
 - OpenCV
 - Numpy
 - Scipy
@@ -58,7 +58,7 @@ performance and runtime usage.
 
 ## Accomplishments
 - Implementation of various classifiers 
-- Functionaly working program
+- Functionally working program
 
 
 Inspired by SketchIt (https://github.com/njiang747/sketchIt)
