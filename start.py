@@ -55,7 +55,7 @@ def main():
     training = load_pickled_training_data(directory_path)
 
     if __debug__:
-        print("Loaded {} samples of training data...:".format(len(training)))
+        print("Loaded {} samples of training data...".format(len(training)))
 
     # Convert mapping to lst
     training_vec = [(k, v) for k, v in training.iteritems()]
