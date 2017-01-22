@@ -38,8 +38,14 @@ def draw_circle(event, x, y, flags, param):
         drawing = False
 
 
-def main():
-    img = np.zeros((256, 256), np.uint8)
+def create_img(filename="sketch.png", w=256, h=256):
+    """
+    Opens the window and saves the file.
+
+    Returns:
+        str: The file this image was saved in.
+    """
+    img = np.zeros((h, w), np.uint8)
     cv2.namedWindow('image')
     cv2.setMouseCallback('image', draw_circle)
 
@@ -49,10 +55,14 @@ def main():
         if k == ord('m'):
             mode = not mode
         elif k == 27:
-            Image.fromarray(img).save("sketch.png")
+            Image.fromarray(img).save(filename)
             break
 
     cv2.destroyAllWindows()
+
+
+def main():
+    create_img()
 
 
 if __name__ == "__main__":
