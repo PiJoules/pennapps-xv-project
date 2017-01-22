@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
 
-COLOR = (255, 255, 255)
+COLOR = (0, 0, 0)
 RADIUS = 3
 THICKNESS = -1  # filled circle
 
@@ -48,7 +48,7 @@ def create_img(filename="sketch.png", w=256, h=256):
         str: The file this image was saved in.
     """
     global img
-    img = np.zeros((h, w), np.uint8)
+    img = np.full((h, w), 255)
     cv2.namedWindow('image')
     cv2.setMouseCallback('image', draw_circle)
 
@@ -58,7 +58,10 @@ def create_img(filename="sketch.png", w=256, h=256):
         if k == ord('m'):
             mode = not mode
         elif k == 13:
-            Image.fromarray(img).save(filename)
+            new_img = Image.fromarray(img)
+            if new_img.mode != 'RGB':
+                new_img = new_img.convert('RGB')
+            new_img.save(filename)
             break
 
     cv2.destroyAllWindows()
