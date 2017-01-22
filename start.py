@@ -47,7 +47,7 @@ def main():
     training_vec = [(k, v) for k, v in training.iteritems()]
 
     if __debug__:
-        print("Performing edge detection...")
+        print("Performing edge detection on test data...")
 
     test = getBinaryEdges(filename)  # 2d arr
 
