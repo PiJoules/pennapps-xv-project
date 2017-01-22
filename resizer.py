@@ -54,11 +54,11 @@ def pickle_images(images_dir, w=256, h=256, dest_dir=None):
         for filename in files:
             if filename.endswith(".jpg"):
                 # Get parent dir
-                immediate_parent_dir = os.path.dirname(root)
-                basename = filename.rstrip(".jpg")
+                immediate_parent_dir = os.path.basename(root)  # apple, bag, etc.
+                basename = filename.rstrip(".jpg") + "." + immediate_parent_dir  # image0.apple
 
                 # Create pickle path
-                p_file = os.path.join(dest_dir, pickle_filename(basename))
+                p_file = os.path.join(dest_dir, pickle_filename(basename))  # pickled_training_data/image0.apple.p
 
                 # Check if it exists first before creating pickle
                 if not os.path.exists(p_file):
