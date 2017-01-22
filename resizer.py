@@ -44,6 +44,13 @@ def pickle_filename(img_basename):
     return img_basename + ".p"
 
 
+def image_from_pickle_file(p_file):
+    assert p_file.endswith(".p")
+    basename = os.path.basename(p_file)
+    parts = basename.split(".")  # last 2 parts are category (apple) and ext (.p)
+    return os.path.join(parts[-2], ".".join(parts[:-2]) + ".jpg")
+
+
 def pickle_images(images_dir, w=256, h=256, dest_dir=None, lim=5):
     if dest_dir is None:
         dest_dir = "pickled_training_data"
@@ -93,9 +100,6 @@ def get_args():
 
 def main():
     args = get_args()
-    #pickle_imgs(training_dir=args.training_dir,
-    #            width=args.width,
-    #            height=args.height)
     pickle_images(args.training_dir,
                   w=args.width,
                   h=args.height,

@@ -2,12 +2,14 @@ from __future__ import print_function
 
 import json
 import os
+import os.path
 import cPickle as pickle
+import cv2
 
 from convert2d import getBinaryEdges
 from knn import knn
-from original_2d_convertion import convert_original_2D
 from gui import create_img
+from resizer import image_from_pickle_file
 
 
 def get_args():
@@ -68,7 +70,7 @@ def main():
     if __debug__:
         print("Performing classification on input...")
 
-    results = knn(map(lambda x: x[1], training_vec), test, best_n=10)  # list[tuple[int, 2d arr]]
+    results = knn(map(lambda x: x[1], training_vec), test, best_n=5)  # list[tuple[int, 2d arr]]
 
     best_results = []
     for i, img in results:
@@ -76,6 +78,15 @@ def main():
 
     print("best results:")
     print(map(lambda x: x[0], best_results))
+
+    # Display results
+    for result in best_results:
+        img_file = image_from_pickle_file(result[0])  # apple/image0.something.jpg
+        full_path = os.path.join("images", img_file)
+        assert os.path.exists(full_path), "File {} does not exist".format(full_path)
+        cv2.imshow(img_file, cv2.imread(full_path, cv2.IMREAD_COLOR))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     return 0
 
